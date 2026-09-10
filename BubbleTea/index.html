@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- ทำให้เว็บพอดีกับหน้าจอโทรศัพท์ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bubble Tea</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff3f7;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d85c86;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px #ddd;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #d85c86;
+            font-size: 20px;
+        }
+
+        /* เมนูเครื่องดื่ม */
+
+        .drink {
+            border: 2px solid #f1d1dc;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            padding: 15px;
+        }
+
+        .drink label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .drink input {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ช่องเลือก */
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        /* ปุ่ม */
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #d85c86;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #c44873;
+        }
+
+        /* สรุป */
+
+        #result {
+            display: none;
+            background: #fff0f5;
+            border: 2px solid #f1c4d3;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 12px;
+        }
+
+        .total {
+            text-align: center;
+            color: #d85c86;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>🧋 Bubble Tea</h1>
+
+    <p class="subtitle">
+        ระบบสั่งชานมออนไลน์
+    </p>
+
+
+    <!-- ==================== เมนู ==================== -->
+
+    <div class="card">
+
+        <h2>🧋 เลือกเมนู</h2>
+
+
+        <div class="drink">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="drink"
+                    value="45"
+                    data-name="ชานมไต้หวัน"
+                >
+
+                ชานมไต้หวัน - 45 บาท
+
+            </label>
+
+        </div>
+
+
+        <div class="drink">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="drink"
+                    value="50"
+                    data-name="ชานมบราวน์ชูการ์"
+                >
+
+                ชานมบราวน์ชูการ์ - 50 บาท
+
+            </label>
+
+        </div>
+
+
+        <div class="drink">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="drink"
+                    value="50"
+                    data-name="ชาเขียวมัทฉะ"
+                >
+
+                ชาเขียวมัทฉะ - 50 บาท
+
+            </label>
+
+        </div>
+
+
+        <div class="drink">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="drink"
+                    value="45"
+                    data-name="โกโก้"
+                >
+
+                โกโก้ - 45 บาท
+
+            </label>
+
+        </div>
+
+
+        <div class="drink">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="drink"
+                    value="50"
+                    data-name="คาเฟ่ลาเต้"
+                >
+
+                คาเฟ่ลาเต้ - 50 บาท
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================== ความหวาน ==================== -->
+
+    <div class="card">
+
+        <h2>🍬 ระดับความหวาน</h2>
+
+        <select id="sweetness">
+
+            <option value="100%">
+                หวาน 100%
+            </option>
+
+            <option value="75%">
+                หวาน 75%
+            </option>
+
+            <option value="50%">
+                หวาน 50%
+            </option>
+
+            <option value="25%">
+                หวาน 25%
+            </option>
+
+            <option value="0%">
+                ไม่หวาน 0%
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ==================== ท็อปปิ้ง ==================== -->
+
+    <div class="card">
+
+        <h2>🥤 เลือกท็อปปิ้ง</h2>
+
+        <select id="topping">
+
+            <option value="0">
+                ไม่เพิ่มท็อปปิ้ง - 0 บาท
+            </option>
+
+            <option value="10">
+                ไข่มุก - 10 บาท
+            </option>
+
+            <option value="10">
+                วุ้นมะพร้าว - 10 บาท
+            </option>
+
+            <option value="15">
+                ชีสโฟม - 15 บาท
+            </option>
+
+            <option value="15">
+                พุดดิ้ง - 15 บาท
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ==================== จำนวน ==================== -->
+
+    <div class="card">
+
+        <h2>🔢 จำนวน</h2>
+
+        <input
+            type="number"
+            id="quantity"
+            value="1"
+            min="1"
+        >
+
+    </div>
+
+
+    <!-- ==================== ปุ่มสั่งซื้อ ==================== -->
+
+    <button onclick="calculatePrice()">
+
+        🛒 สั่งซื้อ
+
+    </button>
+
+
+    <!-- ==================== สรุปออเดอร์ ==================== -->
+
+    <div id="result"></div>
+
+
+</div>
+
+
+<script>
+
+function calculatePrice() {
+
+    // ตรวจสอบว่าเลือกเครื่องดื่มหรือยัง
+
+    let drink = document.querySelector(
+        'input[name="drink"]:checked'
+    );
+
+
+    if (!drink) {
+
+        alert("กรุณาเลือกเมนูชานม");
+
+        return;
+
+    }
+
+
+    // ชื่อเครื่องดื่ม
+
+    let drinkName =
+        drink.dataset.name;
+
+
+    // ราคาเครื่องดื่ม
+
+    let drinkPrice =
+        Number(drink.value);
+
+
+    // ความหวาน
+
+    let sweetness =
+        document.getElementById("sweetness").value;
+
+
+    // ท็อปปิ้ง
+
+    let topping =
+        document.getElementById("topping");
+
+
+    // ชื่อท็อปปิ้ง
+
+    let toppingName =
+        topping.options[topping.selectedIndex].text;
+
+
+    // ราคาท็อปปิ้ง
+
+    let toppingPrice =
+        Number(topping.value);
+
+
+    // จำนวน
+
+    let quantity =
+        Number(
+            document.getElementById("quantity").value
+        );
+
+
+    // ตรวจสอบจำนวน
+
+    if (quantity < 1) {
+
+        alert("กรุณาใส่จำนวนอย่างน้อย 1 แก้ว");
+
+        return;
+
+    }
+
+
+    // ราคาต่อแก้ว
+
+    let pricePerCup =
+        drinkPrice + toppingPrice;
+
+
+    // ราคารวม
+
+    let total =
+        pricePerCup * quantity;
+
+
+    // แสดงผล
+
+    let result =
+        document.getElementById("result");
+
+
+    result.style.display = "block";
+
+
+    result.innerHTML = `
+
+        <h2>🧾 สรุปออเดอร์</h2>
+
+        <p>
+            🧋 เมนู:
+            <b>${drinkName}</b>
+        </p>
+
+        <p>
+            🍬 ความหวาน:
+            <b>${sweetness}</b>
+        </p>
+
+        <p>
+            🥤 ท็อปปิ้ง:
+            <b>${toppingName}</b>
+        </p>
+
+        <p>
+            🔢 จำนวน:
+            <b>${quantity} แก้ว</b>
+        </p>
+
+        <hr>
+
+        <p class="total">
+            💰 ${total} บาท
+        </p>
+
+        <p style="text-align:center;">
+            ขอบคุณสำหรับการสั่งซื้อ 💕
+        </p>
+
+    `;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
